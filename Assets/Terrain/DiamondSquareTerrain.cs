@@ -1,0 +1,190 @@
+using UnityEngine;
+using System.Collections;
+
+// reference: https://www.youtube.com/watch?v=1HV8GbFnCik
+public class DiamondSquareTerrain : MonoBehaviour {
+    
+    /**************** public attributes ****************/
+
+    // number of divisions in map 
+    public int mapDivisions;
+
+    // size of map
+    public float mapSize;
+
+    // range for height of a vertice in the map
+    public float mapHeightRange;
+
+    public struct Map {
+        public Vector3[] vertices;
+        public Vector2[] uvs;
+        public int[] triangles;
+    }
+
+    /***************************************************/
+    
+    // initialization
+    void Start() {
+        CreateTerrain();
+    }
+
+    // create the terrain
+    void CreateTerrain() {
+
+        // create initial map
+        Map map = createMap(mapDivisions, mapSize);
+
+        // add different heights on the map
+        generateMapHeights(ref map.vertices, mapDivisions, mapSize, mapHeightRange);
+        
+        // create mash based on the map
+        CreateMeshBasedOnMap(map);
+
+    }
+
+    // return tuple consisting of array of vertices, uvs, and triangles based on number of map divisions and map size
+    Map createMap(int mapDivisions, float mapSize) {
+
+        // number of vertices in the map
+        int nVertices = (mapDivisions + 1) * (mapDivisions + 1);
+
+        // half size of map
+        float mapHalfSize = mapSize * 0.5f;
+
+        // half number of divisions in map
+        float divisionSize = mapSize / mapDivisions;
+
+        // array of vertices and uvs in the map
+        Vector3[] vertices = new Vector3[nVertices];
+        Vector2[] uvs = new Vector2[nVertices];
+
+        // triangles formed by 3 vertices, where 2 of them are created for each division
+        int[] triangles = new int [mapDivisions * mapDivisions * 3 * 2];
+
+        int triOffset = 0;
+        for (int i = 0; i <= mapDivisions; i++) {
+
+            for (int j = 0; j <= mapDivisions; j++) {
+
+                // initialise the vertices and uvs in the 1D arrays
+                vertices[i * (mapDivisions + 1)+ j] = new Vector3(-mapHalfSize + j*divisionSize, 0.0f, mapHalfSize-i*divisionSize);
+                uvs[i * (mapDivisions + 1)+ j] = new Vector2((float)i/mapDivisions, (float)j/mapDivisions);
+
+                // create the triangles in the map within certain boundaries
+                if (i < mapDivisions && j < mapDivisions) {
+                    
+                    // locate the vertices for the triangles after every division
+                    int topLeft = i * (mapDivisions+1) + j;
+                    int bottomLeft = (i+1) * (mapDivisions+1) + j;
+                    
+                    // initialise the triangles with the vertices
+                    triangles[triOffset] = topLeft;
+                    triangles[triOffset+1] = topLeft+1;
+                    triangles[triOffset+2] = bottomLeft+1;
+
+                    triangles[triOffset+3] = topLeft;
+                    triangles[triOffset+4] = bottomLeft+1;
+                    triangles[triOffset+5] = bottomLeft;
+
+                    // updates offset to move on to other triangles
+                    triOffset += 6;
+                 }
+            }
+        }
+
+        Map map = new Map
+        {
+            vertices = vertices,
+            uvs = uvs,
+            triangles = triangles
+        };
+
+        return map;
+    }
+
+    // assign y values to the vertices on the map
+    void generateMapHeights(ref Vector3[] vertices, int mapDivisions, float mapSize, float mapHeightRange) {
+
+        // assign y values for four initial points on the map required for Diamond Square Algorithm
+        vertices[0].y = Random.Range(-mapHeightRange, mapHeightRange);
+        vertices[mapDivisions].y = Random.Range(-mapHeightRange, mapHeightRange);
+        vertices[vertices.Length-1].y = Random.Range(-mapHeightRange, mapHeightRange);
+        vertices[(vertices.Length-1) - mapDivisions].y = Random.Range(-mapHeightRange, mapHeightRange);
+
+        // Calculate number of iterations and squares required for Diamond Square Algorithm
+        int iterations = (int)Mathf.Log(mapDivisions, 2);
+        int numSquares = 1;
+
+        // size of the square on the map is equivalent to the number of map divisions
+        int squareSize = mapDivisions;
+
+        // iterations in Diamond Square Algorithm to divide the map into squares
+        for (int i = 0; i < iterations; i++) {
+            
+            // iterates through each row on the map
+            int row = 0;
+            for (int j = 0; j< numSquares; j++) {
+                
+                // iterates through each column on the map
+                int col = 0;
+                for(int k = 0; k < numSquares; k++) {
+
+                    // goes through 
+                    DiamondSquare(ref vertices, row, col, squareSize, mapHeightRange);
+                    col += squareSize;
+                }
+                row += squareSize;
+            }
+            numSquares *= 2;
+            squareSize /= 2;
+            mapHeightRange *= 0.5f;
+        }
+    }
+        
+    // assigns y values to square formed by vertices located at specific row and col
+    void DiamondSquare(ref Vector3[] vertices, int row, int col, int size, float offset) {
+        
+        // half size of map
+        int mapHalfSize = (int)(size*0.5f);
+
+        // locations of the vertices of the square
+        int topLeft = row*(mapDivisions+1)+col;
+        int top = topLeft + mapHalfSize;
+        int topRight = topLeft+size;
+
+        int bottomLeft = (row+size) * (mapDivisions+1) + col;
+        int bottom = bottomLeft + mapHalfSize;
+        int bottomRight = bottomLeft+size;
+
+        int mid = (int)(row+mapHalfSize) * (mapDivisions+1) + (int)(col+mapHalfSize);
+        int left = mid - mapHalfSize;
+        int right = mid + mapHalfSize;
+
+        // Square step occurs - y value of vertices at mid point uses average value from y value of 4 corners and then added with random offset
+        vertices[mid].y = (vertices[topLeft].y + vertices[topLeft+size].y + vertices[bottomLeft].y + vertices[bottomLeft+size].y) * 0.25f + Random.Range(-offset, offset);
+
+        // Diamond step occurs - y value of vertices at the specific locations uses average value from y value of 3 corners (left, mid, and right) and then added with random offset
+        vertices[top].y = (vertices[topLeft].y + vertices[topLeft+size].y + vertices[mid].y)/3 + Random.Range(-offset, offset);
+        vertices[left].y = (vertices[topLeft].y + vertices[bottomLeft].y + vertices[mid].y)/3 + Random.Range(-offset, offset);
+        vertices[right].y = (vertices[topLeft+size].y + vertices[bottomLeft+size].y + vertices[mid].y)/3 + Random.Range(-offset, offset);
+        vertices[bottom].y = (vertices[bottomLeft].y + vertices[bottomLeft+size].y + vertices[mid].y)/3 + Random.Range(-offset, offset);
+    }
+
+    // create mesh based on map
+    void CreateMeshBasedOnMap(Map map) {
+
+        // create mesh
+        Mesh mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+
+        // assign vertices, uvs, and triangles to mesh
+        mesh.vertices = map.vertices;
+        mesh.uv = map.uvs;
+        mesh.triangles = map.triangles;
+
+        mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
+    }
+
+     
+}
