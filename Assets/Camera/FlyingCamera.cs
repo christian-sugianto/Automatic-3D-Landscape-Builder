@@ -1,33 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 // reference: http://forum.unity3d.com/threads/fly-cam-simple-cam-script.67042/
-
 
 public class FlyingCamera : MonoBehaviour
 {
 
     /**************** public attributes ****************/
     public float speed = 100.0f;                //speed
-    public float camSensitivity = 0.25f;        //How sensitive it with mouse
+
+    public float mouseSensitivity = 0.5f;       // Mouse rotation sensitivity.
+    /***************************************************/
+
     private float totalRun = 1.0f;
     private bool isRotating;                    // Determines if the camera is rotating
     private float speedMultiplier;              // Angryboy: Used by Y axis to match the velocity on X/Z axis
-
-    [Range(0.0f, 1.0f)]
-    public float mouseSensitivity = 0.5f;       // Mouse rotation sensitivity.
-    /***************************************************/
+    private float rotationY;                    
 
     /**
      * Move using WASD
      * Hold left click to rotate camera
      * Q/E to raise/lower Y plane
      */
-
-    private float rotationY;
-
-
     void Update()
     {
         // Handles Rotation of camera
