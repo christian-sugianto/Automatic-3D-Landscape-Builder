@@ -10,7 +10,6 @@ public class FlyingCamera : MonoBehaviour
 
     /**************** public attributes ****************/
     public float speed = 100.0f;                //speed
-    public float camSensitivity = 0.25f;        //How sensitive it with mouse
     private float totalRun = 1.0f;
     private bool isRotating;                    // Determines if the camera is rotating
     private float speedMultiplier;              // Angryboy: Used by Y axis to match the velocity on X/Z axis
@@ -25,31 +24,31 @@ public class FlyingCamera : MonoBehaviour
      * Q/E to raise/lower Y plane
      */
 
-    private float rotationY;
+    //private float rotationY;
 
 
     void Update()
     {
         // Handles Rotation of camera
         // Assing isRotating when left click is being pressed
-        if (Input.GetMouseButtonDown(0))
-        {
-            isRotating = true;
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    isRotating = true;
+        //}
 
-        // Assing isRotating to false when left click isnt being pressed
-        if (Input.GetMouseButtonUp(0))
-        {
-            isRotating = false;
-        }
+        //// Assing isRotating to false when left click isnt being pressed
+        //if (Input.GetMouseButtonUp(0))
+        //{
+        //    isRotating = false;
+        //}
 
-        if (isRotating)
-        { 
-            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
-            rotationY += Input.GetAxis("Mouse Y") * mouseSensitivity;
-            rotationY = Mathf.Clamp(rotationY, -90, 90);
-            transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
-        }
+        //if (isRotating)
+        //{ 
+        //    float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
+        //    rotationY += Input.GetAxis("Mouse Y") * mouseSensitivity;
+        //    rotationY = Mathf.Clamp(rotationY, -90, 90);
+        //    transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
+        //}
 
         //Keyboard commands
         Vector3 position = GetNewPosition();
