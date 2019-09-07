@@ -15,16 +15,19 @@ public class DiamondSquareTerrain : MonoBehaviour {
     // range for height of a vertice in the map
     public float mapHeightRange;
 
-    public struct Map {
+    MeshCollider meshCollider;
+
+    public struct Map
+    {
         public Vector3[] vertices;
         public Vector2[] uvs;
         public int[] triangles;
     }
-
     /***************************************************/
     
     // initialization
     void Start() {
+        meshCollider = this.gameObject.AddComponent<MeshCollider>();
         CreateTerrain();
     }
 
@@ -38,8 +41,10 @@ public class DiamondSquareTerrain : MonoBehaviour {
         generateMapHeights(ref map.vertices, mapDivisions, mapSize, mapHeightRange);
         
         // create mash based on the map
-        CreateMeshBasedOnMap(map);
+        Mesh mesh = CreateMeshBasedOnMap(map);
 
+        // Add the mesh to the mesh collider to allow collision
+        meshCollider.sharedMesh = mesh;
     }
 
     // return tuple consisting of array of vertices, uvs, and triangles based on number of map divisions and map size
@@ -171,7 +176,7 @@ public class DiamondSquareTerrain : MonoBehaviour {
     }
 
     // create mesh based on map
-    void CreateMeshBasedOnMap(Map map) {
+    Mesh CreateMeshBasedOnMap(Map map) {
 
         // create mesh
         Mesh mesh = new Mesh();
@@ -184,6 +189,8 @@ public class DiamondSquareTerrain : MonoBehaviour {
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
+
+        return mesh;
     }
 
      
