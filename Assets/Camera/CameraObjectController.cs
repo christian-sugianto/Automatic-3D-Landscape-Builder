@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraObjectController : MonoBehaviour
 {
     /**************** attributes ****************/
-    [Range(0.0f, 1.0f)]
+
     public float mouseSensitivity = 0.5f;   // Mouse rotation sensitivity.
     [Range(0.0f, 35.0f)]
     public float speed;                     // Speed of the camera object.
