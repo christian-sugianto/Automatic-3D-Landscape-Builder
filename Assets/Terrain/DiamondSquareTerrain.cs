@@ -8,6 +8,7 @@ public class DiamondSquareTerrain : MonoBehaviour {
 
     // range for height of a vertice in the map
     public float mapHeightRange;
+    public GameObject pointLight;
 
     MeshCollider meshCollider;
 
@@ -186,6 +187,7 @@ public class DiamondSquareTerrain : MonoBehaviour {
         mesh.vertices = map.vertices;
         mesh.uv = map.uvs;
         mesh.triangles = map.triangles;
+        mesh.colors = generateColor(mesh);
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
@@ -193,5 +195,38 @@ public class DiamondSquareTerrain : MonoBehaviour {
         return mesh;
     }
 
-     
+    // generate Color of the Mesh
+    Color[] generateColor(Mesh mesh)
+    {
+        var colors = new Color[mesh.vertices.Length];
+        for( int i = 0; i < mesh.vertices.Length; i++)
+        {
+            if (mesh.vertices[i].y > 0 && mesh.vertices[i].y < 1)
+                colors[i] = Color.green;
+            else if (mesh.vertices[i].y > 0.8)
+                colors[i] = Color.white;
+            else
+                colors[i] = Color.yellow;
+        }
+        return colors;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Get renderer component (in order to pass params to shader)
+        MeshRenderer renderer = this.gameObject.GetComponent<MeshRenderer>();
+
+        Vector3 lightPos = this.pointLight.transform.position;
+        if (lightPos.y > this.transform.position.y)
+        {
+            // Pass updated light positions to shader
+            renderer.material.SetColor("_PointLightColor", this.pointLight.GetComponent<Light>().color);
+            renderer.material.SetVector("_PointLightPosition", this.pointLight.transform.position);
+        }
+        else
+        {
+            renderer.material.SetColor("_PointLightColor", Color.black);
+        }
+    }
 }
