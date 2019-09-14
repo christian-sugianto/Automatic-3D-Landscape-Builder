@@ -4,18 +4,18 @@ using System.Collections;
 // reference: https://www.youtube.com/watch?v=1HV8GbFnCik
 public class DiamondSquareTerrain : MonoBehaviour {
     
-    /**************** public attributes ****************/
-
-    // number of divisions in map 
-    public int mapDivisions;
-
-    // size of map
-    public float mapSize;
+    /**************** attributes ****************/
 
     // range for height of a vertice in the map
     public float mapHeightRange;
 
     MeshCollider meshCollider;
+
+    // number of divisions in map 
+    private int mapDivisions = 128;
+
+    // size of map
+    private float mapSize = 5;
 
     public struct Map
     {

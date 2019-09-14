@@ -598,8 +598,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e9ecade1ae24243b673c785b6eee7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapDivisions: 128
-  mapSize: 5
   mapHeightRange: 1
 --- !u!23 &1037991324
 MeshRenderer:
@@ -688,7 +686,7 @@ MeshCollider:
   m_GameObject: {fileID: 1173334292}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14

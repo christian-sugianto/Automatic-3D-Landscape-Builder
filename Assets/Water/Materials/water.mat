@@ -73,7 +73,7 @@ Material:
     - _Speed: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _Wavelength: 10
+    - _Wavelength: 4
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.1505874, g: 0.37144905, b: 0.6792453, a: 1}

@@ -18,7 +18,4 @@ public class RigidBodyCollision : MonoBehaviour
         rb.velocity = new Vector3();
         rb.freezeRotation = true;
     }
-
-
-
 }

@@ -11,7 +11,6 @@ public class CameraObjectController : MonoBehaviour
     [Range(0.0f, 35.0f)]
     public float speed;                     // Speed of the camera object.
     
-    private bool isRotating;                // Determines if the camera is rotating
     private float rotationY;
     private float rotationX;
     /********************************************/
@@ -34,21 +33,10 @@ public class CameraObjectController : MonoBehaviour
     void Update()
     { 
 		// Handles Rotation of camera
-		// Assing isRotating when left click is being pressed
-		if (Input.GetMouseButtonDown(0))
-			isRotating = true;
-       
-		// Assing isRotating to false when left click isnt being pressed
-		if (Input.GetMouseButtonUp(0))
-			isRotating = false;
-
-		if (isRotating)
-        { 
-		    rotationX += Input.GetAxis("Mouse X") * mouseSensitivity;
-		    rotationY += Input.GetAxis("Mouse Y") * mouseSensitivity;
-		    rotationY = Mathf.Clamp(rotationY, -90, 90);
-		    transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
-        }
+        rotationX += Input.GetAxis("Mouse X") * mouseSensitivity;
+        rotationY += Input.GetAxis("Mouse Y") * mouseSensitivity;
+        rotationY = Mathf.Clamp(rotationY, -90, 90);
+        transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
 
         // Handles Keyboard input
         Vector3 position = new Vector3();
