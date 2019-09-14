@@ -45,8 +45,7 @@ public class DiamondSquareTerrain : MonoBehaviour {
         // generate heightmap
         Map map = generateMapWithHeights();
         
-        Debug.Log("average height is" + GetAverageY(ref map.vertices));
-        // Make sure the heightmap generated isn't too extreme, e.g. all snow terrain/ all water terrain.
+        // Making sure average height in the map is not too extreme
         while (GetAverageY(ref map.vertices) > maxAverageY || GetAverageY(ref map.vertices) < minAverageY) {
 
             // generate heightmap
@@ -56,14 +55,12 @@ public class DiamondSquareTerrain : MonoBehaviour {
 
         // Create new array to store new vertices height values.
         Vector3[] curvedVertices = new Vector3[map.vertices.Length];
-        for (int i = 0; i < map.vertices.Length; i++)
-        {
-            // Adjust height based on the input animation curve. 
+        for (int i = 0; i < map.vertices.Length; i++) {
+            // Adjust y-value of vertices of the map based on animation curve. 
             curvedVertices[i] = new Vector3(map.vertices[i].x,
                                             terrainAnimationCurve.Evaluate(map.vertices[i].y),
                                             map.vertices[i].z);
         }
-
         map.vertices = curvedVertices;
 
         // create mash based on the map
