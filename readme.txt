@@ -26,4 +26,5 @@ This is a 2D object in the form of a plane in which its movement
 
 References:
     -> Diamond Square Algorithm - https://www.youtube.com/watch?v=1HV8GbFnCik
+    -> Phong Shading for Terrain - https://janhalozan.com/2017/08/12/phong-shader/
 

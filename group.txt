@@ -6,12 +6,8 @@ Team Members (Full Name, Student ID):
 Team Member Contributions:
 
 Christian Hadinata Sugianto: Terrain Generation (Average HeightMap Limits and Animation Curve), Diamond Square Algorithm Implementation on Terrain
-                                Water Movement (Waves), Initial Camera Perspective Projection
+                                Water Movement (Waves), Initial Camera Perspective Projection, Phong Shading (Water and Terrain)
 
-Jenpin Wong: Camera Movement Control, Camera Pitch and Yaw Control, Sun Transition and Lighting, Camera Boundaries, 
-                                Phong Shading (Water and Terrain)
+Jenpin Wong: Camera Movement Control, Camera Pitch and Yaw Control, Sun Transition and Lighting, Camera Boundaries
 
 Yiyuan Wei: Water Movement (Waves), Phong Shading (Water and Terrain)
-
-Not Yet:
-- Terrain Colour Shader
