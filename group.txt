@@ -1,0 +1,17 @@
+Team Members (Full Name, Student ID):
+1. Christian Hadinata Sugianto, 900800
+2. Jenpin Wong, 950408
+3. Yiyuan Wei, 793213
+
+Team Member Contributions:
+
+Christian Hadinata Sugianto: Terrain Generation with Diamond Square Algorithm, Water Movement (Waves), 
+                                Initial Camera Perspective Projection
+
+Jenpin Wong: Camera Movement Control, Camera Pitch and Yaw Control, Sun Transition and Lighting, Camera Boundaries
+
+Yiyuan Wei: Water Movement (Waves), Phong Shading (Water and Terrain)
+
+Not Yet:
+- Phong Shading (Terrain)
+- Terrain Colour Shader

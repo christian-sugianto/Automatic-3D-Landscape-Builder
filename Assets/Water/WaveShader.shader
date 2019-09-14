@@ -23,7 +23,7 @@ Shader "Custom/Waves" {
 		struct Input {
 			float2 uv_MainTex;
 		};
-
+		
 		half _Glossiness;
 		half _Metallic;
 		fixed4 _Color;

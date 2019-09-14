@@ -7,12 +7,12 @@ public class CameraObjectController : MonoBehaviour
 {
     /**************** attributes ****************/
 
-    public float mouseSensitivity = 0.5f;   // Mouse rotation sensitivity.
+    public float mouseSensitivity = 0.5f;           // Mouse rotation sensitivity.
     [Range(0.0f, 35.0f)]
-    public float speed;                     // Speed of the camera object.
+    public float speed;                             // Speed of the camera object.
     
-    private float rotationY;
-    private float rotationX;
+    private float rotationY;                        // Camera Rotation in Y Axis
+    private float rotationX;                        // Camera Rotation in X Axis
     /********************************************/
 
     /**
@@ -20,7 +20,6 @@ public class CameraObjectController : MonoBehaviour
      * Hold left click to rotate camera
      * Q/E to raise/lower Y plane
      */
-
 
     void Start()
     {

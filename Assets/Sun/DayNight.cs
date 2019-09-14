@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DayNight : MonoBehaviour
-{
-    public float speed;
-    private float rotationX;
+{   
+    public float speed;             // Movement Speed of Sun
+    private float rotationX;        // Rotation of Sun in X-axis
 
     void Start()
     {
         this.rotationX = transform.localEulerAngles.x;
     }
+
     // Update is called once per frame
     void Update()
     {

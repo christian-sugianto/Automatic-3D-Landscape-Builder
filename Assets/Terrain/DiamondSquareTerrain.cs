@@ -9,6 +9,13 @@ public class DiamondSquareTerrain : MonoBehaviour {
     // range for height of a vertice in the map
     public float mapHeightRange;
 
+    [Range(-1.0f, 0.0f)]
+    public float minimumAverageHeight;
+    
+    [Range(0.0f, 1.0f)]
+    public float maximumAverageHeight;
+    
+
     MeshCollider meshCollider;
 
     // number of divisions in map 
@@ -34,17 +41,33 @@ public class DiamondSquareTerrain : MonoBehaviour {
     // create the terrain
     void CreateTerrain() {
 
-        // create initial map
-        Map map = createMap(mapDivisions, mapSize);
-
-        // add different heights on the map
-        generateMapHeights(ref map.vertices, mapDivisions, mapSize, mapHeightRange);
+        // generate heightmap
+        Map map = generateMapWithHeights();
         
+        Debug.Log("average height is" + GetAverageY(ref map.vertices));
+        // Make sure the heightmap generated isn't too extreme, e.g. all snow terrain/ all water terrain.
+        while (GetAverageY(ref map.vertices) > maximumAverageHeight || GetAverageY(ref map.vertices) < minimumAverageHeight) {
+
+            // generate heightmap
+            map = generateMapWithHeights();
+            Debug.Log("Regenerating Terrain.. Please be patient");
+        }
+
         // create mash based on the map
         Mesh mesh = CreateMeshBasedOnMap(map);
 
         // Add the mesh to the mesh collider to allow collision
         meshCollider.sharedMesh = mesh;
+    }
+
+    Map generateMapWithHeights() {
+        // create initial map
+        Map map = createMap(mapDivisions, mapSize);
+
+        // add different heights on the map
+        generateMapHeights(ref map.vertices, mapDivisions, mapSize, mapHeightRange);
+
+        return map;
     }
 
     // return tuple consisting of array of vertices, uvs, and triangles based on number of map divisions and map size
@@ -173,6 +196,21 @@ public class DiamondSquareTerrain : MonoBehaviour {
         vertices[left].y = (vertices[topLeft].y + vertices[bottomLeft].y + vertices[mid].y)/3 + Random.Range(-offset, offset);
         vertices[right].y = (vertices[topLeft+size].y + vertices[bottomLeft+size].y + vertices[mid].y)/3 + Random.Range(-offset, offset);
         vertices[bottom].y = (vertices[bottomLeft].y + vertices[bottomLeft+size].y + vertices[mid].y)/3 + Random.Range(-offset, offset);
+    }
+
+    // get average y values of vertices of terrain
+    private float GetAverageY(ref Vector3[] vertices)
+    {
+        var totalY = 0.0;
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            totalY += vertices[i].y;
+        }
+
+        // the average of vertices
+        var averageY = totalY / vertices.Length;
+
+        return (float) averageY;
     }
 
     // create mesh based on map
