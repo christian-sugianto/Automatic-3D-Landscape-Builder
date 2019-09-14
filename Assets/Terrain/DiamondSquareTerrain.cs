@@ -10,11 +10,12 @@ public class DiamondSquareTerrain : MonoBehaviour {
     public float mapHeightRange;
 
     [Range(-1.0f, 0.0f)]
-    public float minimumAverageHeight;
+    public float minAverageY;
     
     [Range(0.0f, 1.0f)]
-    public float maximumAverageHeight;
-    
+    public float maxAverageY;
+
+    public AnimationCurve terrainAnimationCurve;
 
     MeshCollider meshCollider;
 
@@ -46,18 +47,30 @@ public class DiamondSquareTerrain : MonoBehaviour {
         
         Debug.Log("average height is" + GetAverageY(ref map.vertices));
         // Make sure the heightmap generated isn't too extreme, e.g. all snow terrain/ all water terrain.
-        while (GetAverageY(ref map.vertices) > maximumAverageHeight || GetAverageY(ref map.vertices) < minimumAverageHeight) {
+        while (GetAverageY(ref map.vertices) > maxAverageY || GetAverageY(ref map.vertices) < minAverageY) {
 
             // generate heightmap
             map = generateMapWithHeights();
             Debug.Log("Regenerating Terrain.. Please be patient");
         }
 
+        // Create new array to store new vertices height values.
+        Vector3[] curvedVertices = new Vector3[map.vertices.Length];
+        for (int i = 0; i < map.vertices.Length; i++)
+        {
+            // Adjust height based on the input animation curve. 
+            curvedVertices[i] = new Vector3(map.vertices[i].x,
+                                            terrainAnimationCurve.Evaluate(map.vertices[i].y),
+                                            map.vertices[i].z);
+        }
+
+        map.vertices = curvedVertices;
+
         // create mash based on the map
         Mesh mesh = CreateMeshBasedOnMap(map);
 
         // Add the mesh to the mesh collider to allow collision
-        meshCollider.sharedMesh = mesh;
+        GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
     Map generateMapWithHeights() {
