@@ -15,15 +15,15 @@ public class DiamondSquareTerrain : MonoBehaviour {
     [Range(0.0f, 1.0f)]
     public float maxAverageY;
 
+    // number of divisions in map 
+    public int mapDivisions;
+
+    // size of map
+    public float mapSize;
+
     public AnimationCurve terrainAnimationCurve;
 
     MeshCollider meshCollider;
-
-    // number of divisions in map 
-    private int mapDivisions = 128;
-
-    // size of map
-    private float mapSize = 5;
 
     public struct Map
     {
@@ -53,9 +53,10 @@ public class DiamondSquareTerrain : MonoBehaviour {
             Debug.Log("Regenerating Terrain.. Please be patient");
         }
 
-        // Create new array to store new vertices height values.
+        // Create array to store new vertices
         Vector3[] curvedVertices = new Vector3[map.vertices.Length];
         for (int i = 0; i < map.vertices.Length; i++) {
+
             // Adjust y-value of vertices of the map based on animation curve. 
             curvedVertices[i] = new Vector3(map.vertices[i].x,
                                             terrainAnimationCurve.Evaluate(map.vertices[i].y),
@@ -240,6 +241,18 @@ public class DiamondSquareTerrain : MonoBehaviour {
 
         return mesh;
     }
-
-     
 }
+
+// -38.48796
+// 41.6155
+// -36.5209
+
+// 35.025
+// 45.85
+
+// -37.06147
+// 27.3552
+// -38.4673
+
+// 24.675
+// 44.725

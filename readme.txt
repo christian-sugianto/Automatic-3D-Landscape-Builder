@@ -21,4 +21,9 @@ The movement of the sun is determined by "Day Night" script in SunPivot.
 This is an object made up of its child objects which are 4 planes: Plane (Left), Plane (Right), Plane (Front), Plane (Back).
 Each plane has mesh collider to act as limit boundaries for CameraObject, so that it does not move outside the bounds of landscape.
 
-5. 
+5. Water
+This is a 2D object in the form of a plane in which its movement
+
+References:
+    -> Diamond Square Algorithm - https://www.youtube.com/watch?v=1HV8GbFnCik
+
