@@ -9,17 +9,17 @@ public class DiamondSquareTerrain : MonoBehaviour {
     // range for height of a vertice in the map
     public float mapHeightRange;
 
-    [Range(-1.0f, 0.0f)]
-    public float minAverageY;
-    
-    [Range(0.0f, 1.0f)]
-    public float maxAverageY;
-
     // number of divisions in map 
     public int mapDivisions;
 
     // size of map
     public float mapSize;
+
+    [Range(-1.0f, 0.0f)]
+    public float minAverageY;
+    
+    [Range(0.0f, 1.0f)]
+    public float maxAverageY;
 
     public AnimationCurve terrainAnimationCurve;
 
@@ -242,17 +242,3 @@ public class DiamondSquareTerrain : MonoBehaviour {
         return mesh;
     }
 }
-
-// -38.48796
-// 41.6155
-// -36.5209
-
-// 35.025
-// 45.85
-
-// -37.06147
-// 27.3552
-// -38.4673
-
-// 24.675
-// 44.725

@@ -10,4 +10,4 @@ Christian Hadinata Sugianto: Terrain Generation (Average HeightMap Limits and An
 
 Jenpin Wong: Camera Movement Control, Camera Pitch and Yaw Control, Sun Transition and Lighting, Camera Boundaries
 
-Yiyuan Wei: Water Movement (Waves), Phong Shading (Water and Terrain)
+Yiyuan Wei: Water Movement (Waves), Phong Shading (Water)
