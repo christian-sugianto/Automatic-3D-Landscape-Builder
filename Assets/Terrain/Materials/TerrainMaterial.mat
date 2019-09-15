@@ -90,11 +90,11 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0.33962262, b: 0.006276328, a: 1}
-    - _ColorGrass: {r: 0, g: 0.2735849, b: 0.006926206, a: 1}
+    - _ColorGrass: {r: 0, g: 0.46226418, b: 0.013463984, a: 1}
     - _ColorGrass2: {r: 1, g: 1, b: 1, a: 1}
     - _ColorMax: {r: 1, g: 1, b: 1, a: 1}
     - _ColorMin: {r: 0, g: 0, b: 0, a: 1}
-    - _ColorRock: {r: 0.3018868, g: 0.1281595, b: 0, a: 1}
+    - _ColorRock: {r: 0.41509432, g: 0.17789757, b: 0, a: 1}
     - _ColorRock2: {r: 1, g: 1, b: 1, a: 1}
     - _ColorSand: {r: 0.7264151, g: 0.36663404, b: 0.36663404, a: 1}
     - _ColorSnow: {r: 1, g: 1, b: 1, a: 1}
