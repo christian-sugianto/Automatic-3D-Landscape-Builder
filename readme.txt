@@ -10,15 +10,18 @@ Then, "PhongTerrainShader" is used to give texture to the terrain in the map dep
 Finally, the mesh is created with the vertices, triangles, and uvs.
 
 2. CameraObject
-This is a 3D object in the form of a sphere in which it is used for moving and rotationg its child object, "MainCamera".
+This is a 3D object in the form of a sphere in which it is used for moving and rotating its child object, "MainCamera".
 In the CameraObject, movement along with the pitch and yaw are controlled by "Camera Object Controller" script meanwhile the collision detection is determined by "Rigid Body Collision" script.
-* ADD BRIEF IMPLEMENTATION OF CAMERA OBJECT CONTROLLER"
-* ADD BRIEF IMPLEMENTATION OF RIGID BODY COLLISION"
+Camera Object Controller controls the position of the object based on input. 
+Inputs are: WASD, QE (For moving along the y axis), Mouse (Move the mouse to rotate the screen)
+Rigid Body Collision modify some of the collision physics such as the object moving randomly upon collision
 
 3. SunPivot
 This is a 3D object in the form of a sphere in which it is where the Sun is rotating while lighting with Directional Light.
 The movement of the sun is determined by "Day Night" script in SunPivot.
-* ADD BRIEF IMPLEMENTATION OF DAY NIGHT"
+
+An Object is used as a pivot for the sun where it will rotate hence causing the sun to move according to its rotation. Based on this rotation, the directional light is also being rotated hence causing this day/night event. The Day/Night script handles the rotation of directional light based on the rotation of the sun pivot.
+
 
 4. Boundaries
 This is an object made up of its child objects which are 4 planes: Plane (Left), Plane (Right), Plane (Front), Plane (Back).
