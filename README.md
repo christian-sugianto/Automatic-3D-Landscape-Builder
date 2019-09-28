@@ -3,6 +3,7 @@
 Below is the link to the video demonstrating the automatic landscape generation and the visual interactions:
 [![picture](readme-img/picture.png)](http://www.youtube.com/watch?v=lFDNwI_1yHk "Automatic 3D Landscape Builder")
 
+### Implementation Details
 The 3D landscape consists of 5 Main Objects. The implementations of each Main Objects are at the following:
 
 1. Terrain
@@ -35,7 +36,8 @@ In the CameraObject, movement along with the pitch and yaw are controlled by "Ca
 	3. Besides, the "WaveShader" also determines Amplitude, Speed, and Wavelength of the waves in the water. 
 
 References:
-	1. Diamond Square Algorithm - https://www.youtube.com/watch?v=1HV8GbFnCik
-	2. Phong Shading for Terrain - https://janhalozan.com/2017/08/12/phong-shader/
-	3. Wave Shader - https://catlikecoding.com/unity/tutorials/flow/waves/
+
+1. Diamond Square Algorithm - https://www.youtube.com/watch?v=1HV8GbFnCik
+2. Phong Shading for Terrain - https://janhalozan.com/2017/08/12/phong-shader/
+3. Wave Shader - https://catlikecoding.com/unity/tutorials/flow/waves/
 
