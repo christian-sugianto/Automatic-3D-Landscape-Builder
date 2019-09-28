@@ -1,6 +1,5 @@
-Here is the preview of the project:
+Below is the link to the video demonstrating the automatic landscape generation and the visual interactions:
 [![picture](readme-img/picture.png)](http://www.youtube.com/watch?v=lFDNwI_1yHk "Automatic 3D Landscape Builder")
-
 
 The 3D landscape consists of 5 Main Objects. The implementations of each Main Objects are at the following:
 
