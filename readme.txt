@@ -1,3 +1,7 @@
+Here is the preview of the project:
+[![](http://img.youtube.com/vi/lFDNwI_1yHk/0.jpg)](http://www.youtube.com/watch?v=lFDNwI_1yHk "Automatic 3D Landscape Builder")
+
+
 The 3D landscape consists of 5 Main Objects. The implementations of each Main Objects are at the following:
 
 1. Terrain
