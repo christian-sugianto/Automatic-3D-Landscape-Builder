@@ -1,4 +1,4 @@
-# Automatic 3D Landscape Builder
+# Automatic 3D Landscape Builder with Unity
 
 Below is the link to the video demonstrating the automatic landscape generation and the visual interactions:
 [![picture](readme-img/picture.png)](http://www.youtube.com/watch?v=lFDNwI_1yHk "Automatic 3D Landscape Builder")
